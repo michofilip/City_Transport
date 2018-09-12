@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import pl.coderslab.ride.RideRepository;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -20,6 +22,7 @@ public class BusController {
 //    DELETE 	/books/{id} 	Usuwa książkę o podanym id z bazy danych.
 
     private final BusRepository busRepository;
+    private final RideRepository rideRepository;
 
     @ModelAttribute("buses")
     public List<Bus> buses() {
@@ -61,8 +64,13 @@ public class BusController {
     }
 
     @GetMapping("/del/{id}")
-    public String delete(@PathVariable long id) {
-        busRepository.delete(id);
+    public String delete(@PathVariable long id, RedirectAttributes redirectAttributes) {
+        if (rideRepository.findByBus(busRepository.findOne(id)).isEmpty()) {
+            busRepository.delete(id);
+        } else {
+            redirectAttributes.addFlashAttribute("message", "Cannot remove bus. Remove dependencies first.");
+        }
+
         return "redirect:/buses/";
     }
 }

@@ -1,81 +1,85 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../header.jsp"/>
 
-<div id="page-wrapper">
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Lines</h1>
-        </div>
-        <!-- /.col-lg-12 -->
+<%--<div id="page-wrapper">--%>
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Lines</h1>
     </div>
-    <!-- /.row -->
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
 
-    <!-- /.row -->
-    <div class="row">
+<!-- /.row -->
+<div class="row">
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                Details
-            </div>
-            <!-- /.panel-heading -->
-            <div class="panel-body">
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover">
-                        <tbody>
-                        <tr>
-                            <td>ID</td>
-                            <td><c:out value="${line.id}"/></td>
-                        </tr>
-                        <tr>
-                            <td>Number</td>
-                            <td><c:out value="${line.number}"/></td>
-                        </tr>
-                        <tr>
-                            <td>Variant</td>
-                            <td><c:out value="${line.variant}"/></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <!-- /.table-responsive -->
-                <a href="/lines/edit/<c:out value="${line.id}"/>">Edit</a>
-                <a href="/lines/del/<c:out value="${line.id}"/>">Delete</a>
-            </div>
-            <!-- /.panel-body -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Details
         </div>
-
-    </div>
-    <!-- /.row -->
-
-    <div class="row">
-        Busstops
-        <ol>
-            <c:forEach var="busstop" items="${busstops}">
-                <c:set var="hour" value="-1"/>
-                <li>
-                    <c:out value="${busstop.name}"/>
-                    <c:forEach var="schedule" items="${schedules.get(busstop.id)}">
-                        <c:if test="${hour != schedule.arrivalTime.hour}">
-                            <br>
-                            <c:out value="${schedule.arrivalTime.hour}"/>:
-                            <c:set var="hour" value="${schedule.arrivalTime.hour}"/>
-                        </c:if>
-
-                        <c:if test="${hour == schedule.arrivalTime.hour}">
-                            <c:if test="${schedule.arrivalTime.minute < 10}">
-                                0<c:out value="${schedule.arrivalTime.minute}"/>
-                            </c:if>
-                            <c:if test="${schedule.arrivalTime.minute >= 10}">
-                                <c:out value="${schedule.arrivalTime.minute}"/>
-                            </c:if>
-                        </c:if>
-                    </c:forEach>
-                </li>
-            </c:forEach>
-        </ol>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover">
+                    <tbody>
+                    <tr>
+                        <td>ID</td>
+                        <td><c:out value="${line.id}"/></td>
+                    </tr>
+                    <tr>
+                        <td>Number</td>
+                        <td><c:out value="${line.number}"/></td>
+                    </tr>
+                    <tr>
+                        <td>Variant</td>
+                        <td><c:out value="${line.variant}"/></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.table-responsive -->
+            <a href="/lines/edit/<c:out value="${line.id}"/>">Edit</a>
+            <a href="/lines/del/<c:out value="${line.id}"/>" class="confirm">Delete</a>
+        </div>
+        <!-- /.panel-body -->
     </div>
 
 </div>
+<!-- /.row -->
+
+<div class="row">
+    Busstops
+    <ol>
+        <c:forEach var="busstop" items="${busstops}">
+            <c:set var="hour" value="-1"/>
+            <li>
+                <a href="/busstops/details/<c:out value="${busstop.id}"/>"> ${busstop.name}</a>
+                <%--<c:out value="${busstop.name}"/>--%>
+                <c:forEach var="schedule" items="${schedules.get(busstop.id)}">
+                    <c:if test="${hour != schedule.arrivalTime.hour}">
+                        <br>
+                        <c:out value="${schedule.arrivalTime.hour}"/>:
+                        <c:set var="hour" value="${schedule.arrivalTime.hour}"/>
+                    </c:if>
+
+                    <c:if test="${hour == schedule.arrivalTime.hour}">
+                        <%--<c:if test="${schedule.arrivalTime.minute < 10}">--%>
+                            <%--0<c:out value="${schedule.arrivalTime.minute}"/>--%>
+                        <%--</c:if>--%>
+                        <%--<c:if test="${schedule.arrivalTime.minute >= 10}">--%>
+                            <%--<c:out value="${schedule.arrivalTime.minute}"/>--%>
+                        <%--</c:if>--%>
+                        <c:if test="${schedule.arrivalTime.minute < 10}">0</c:if><c:out
+                            value="${schedule.arrivalTime.minute}"/>
+
+                    </c:if>
+                </c:forEach>
+            </li>
+        </c:forEach>
+    </ol>
+</div>
+
+<%--</div>--%>
 <!-- /#page-wrapper -->
 
 <jsp:include page="../footer.jsp"/>

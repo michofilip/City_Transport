@@ -4,7 +4,7 @@
 <%--<div id="page-wrapper">--%>
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Buses</h1>
+        <h1 class="page-header">Announcement</h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -13,21 +13,26 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Bus details
+                Announcement form
             </div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-6">
 
-                        <form:form role="form" action="/buses/save" modelAttribute="bus" method="POST">
+                        <form:form role="form" action="/announcements/save" modelAttribute="announcement" method="POST">
                             <form:hidden path="id"/>
 
                             <div class="form-group">
-                                Plate number
-                                <form:input path="plateNumber" cssErrorClass="error"/>
-                                <form:errors path="plateNumber" cssClass="error"/><br>
+                                Title
+                                <form:input path="title" cssErrorClass="error"/>
+                                <form:errors path="title" cssClass="error"/><br>
                             </div>
 
+                            <div class="form-group">
+                                Content
+                                <form:textarea path="content" cssErrorClass="error" rows="20" cols="100"/>
+                                <form:errors path="content" cssClass="error"/><br>
+                            </div>
 
                             <input type="submit" value="Submit" class="btn btn-default">
                         </form:form>

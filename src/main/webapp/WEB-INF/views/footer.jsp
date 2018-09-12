@@ -1,4 +1,5 @@
 </div>
+</div>
 <!-- /#wrapper -->
 
 <!-- jQuery -->
@@ -12,6 +13,8 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="/resources/dist/js/sb-admin-2.js"></script>
+
+<script src="/resources/dist/js/confirm.js"></script>
 
 </body>
 

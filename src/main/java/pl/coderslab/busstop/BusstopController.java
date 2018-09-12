@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.coderslab.line.Line;
 import pl.coderslab.line.LineRepository;
 import pl.coderslab.ride.Ride;
@@ -83,8 +84,12 @@ public class BusstopController {
     }
 
     @GetMapping("/del/{id}")
-    public String delete(@PathVariable long id) {
-        busstopRepository.delete(id);
+    public String delete(@PathVariable long id, RedirectAttributes redirectAttributes) {
+        if (routeRepository.findByBusstop(busstopRepository.findOne(id)).isEmpty()) {
+            busstopRepository.delete(id);
+        } else {
+            redirectAttributes.addFlashAttribute("message", "Cannot remove busstop. Remove dependencies first.");
+        }
         return "redirect:/busstops/";
     }
 }

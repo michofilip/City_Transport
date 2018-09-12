@@ -21,4 +21,9 @@ public interface RideRepository extends JpaRepository<Ride, Long> {
 
     @Query("select ent from Ride ent where ent.route = :route order by ent.arrivalTime asc")
     List<Ride> findByRoute(@Param("route") Route route);
+
+
+    @Query("select ent from Ride ent where ent.bus = :bus")
+    List<Ride> findByBus(@Param("bus") Bus bus);
+
 }

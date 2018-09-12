@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.coderslab.busstop.Busstop;
 import pl.coderslab.busstop.BusstopRepository;
 import pl.coderslab.ride.Ride;
@@ -91,8 +92,13 @@ public class LineController {
     }
 
     @GetMapping("/del/{id}")
-    public String delete(@PathVariable long id) {
-        lineRepository.delete(id);
+    public String delete(@PathVariable long id, RedirectAttributes redirectAttributes) {
+        if (routeRepository.findByLine(lineRepository.findOne(id)).isEmpty()) {
+            lineRepository.delete(id);
+        } else {
+            redirectAttributes.addFlashAttribute("message", "Cannot remove line. Remove dependencies first.");
+        }
+
         return "redirect:/lines/";
     }
 
@@ -128,12 +134,15 @@ public class LineController {
     }
 
     @GetMapping("/removeBusstop/{routeId}")
-    public String addBusstop(@PathVariable long routeId) {
+    public String addBusstop(@PathVariable long routeId, RedirectAttributes redirectAttributes) {
         Route route = routeRepository.findOne(routeId);
         Line line = route.getLine();
-
-        routeRepository.delete(route);
-        reorderBusstops(line);
+        if (rideRepository.findByRoute(route).isEmpty()) {
+            routeRepository.delete(route);
+            reorderBusstops(line);
+        } else {
+            redirectAttributes.addFlashAttribute("message", "Cannot detach busstop from line. Remove schedules first.");
+        }
 
         return "redirect:/lines/edit/" + line.getId().toString();
     }
