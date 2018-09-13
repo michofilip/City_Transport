@@ -61,20 +61,20 @@ public class BusstopController {
         return "busstop/details";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/admin/add")
     public String add(Model model) {
         model.addAttribute("busstop", new Busstop());
         return "busstop/form";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/admin/edit/{id}")
     public String edit(@PathVariable long id, Model model) {
         Busstop busstop = busstopRepository.findOne(id);
         model.addAttribute("busstop", busstop);
         return "busstop/form";
     }
 
-    @PostMapping("/save")
+    @PostMapping("/admin/save")
     public String saveForm(@Valid Busstop busstop, BindingResult result) {
         if (result.hasErrors()) {
             return "busstop/form";
@@ -83,7 +83,7 @@ public class BusstopController {
         return "redirect:/busstops/";
     }
 
-    @GetMapping("/del/{id}")
+    @GetMapping("/admin/del/{id}")
     public String delete(@PathVariable long id, RedirectAttributes redirectAttributes) {
         if (routeRepository.findByBusstop(busstopRepository.findOne(id)).isEmpty()) {
             busstopRepository.delete(id);

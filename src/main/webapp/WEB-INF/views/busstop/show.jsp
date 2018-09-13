@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <jsp:include page="../header.jsp"/>
 
 <%--<div id="page-wrapper">--%>
@@ -9,22 +10,23 @@
     <!-- /.col-lg-12 -->
 </div>
 
-<div class="row">
-
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <form role="form" action="/busstops/add" method="get">
-                            <button class="btn btn-default">New busstop</button>
-                        </form>
+<sec:authorize access="hasRole('ADMIN')">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <form role="form" action="/busstops/admin/add" method="get">
+                                <button class="btn btn-default">New busstop</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</sec:authorize>
 <!-- /.row -->
 
 <!-- /.row -->
@@ -47,12 +49,14 @@
                     <tbody>
                     <c:forEach var="busstop" items="${busstops}">
                         <tr>
-                            <%--<td><c:out value="${busstop.id}"/></td>--%>
+                                <%--<td><c:out value="${busstop.id}"/></td>--%>
                             <td><c:out value="${busstop.name}"/></td>
                             <td>
                                 <a href="/busstops/details/<c:out value="${busstop.id}"/>">Details</a>
-                                <a href="/busstops/edit/<c:out value="${busstop.id}"/>">Edit</a>
-                                <a href="/busstops/del/<c:out value="${busstop.id}"/>" class="confirm">Delete</a>
+                                <sec:authorize access="hasRole('ADMIN')">
+                                    <a href="/busstops/admin/edit/<c:out value="${busstop.id}"/>">Edit</a>
+                                    <a href="/busstops/admin/del/<c:out value="${busstop.id}"/>" class="confirm">Delete</a>
+                                </sec:authorize>
                             </td>
                         </tr>
                     </c:forEach>

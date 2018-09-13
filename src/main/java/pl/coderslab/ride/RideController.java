@@ -112,20 +112,20 @@ public class RideController {
         return "ride/details";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/admin/add")
     public String add(Model model) {
         model.addAttribute("ride", new Ride());
         return "ride/form";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/admin/edit/{id}")
     public String edit(@PathVariable long id, Model model) {
         Ride ride = rideRepository.findOne(id);
         model.addAttribute("ride", ride);
         return "ride/form";
     }
 
-    @PostMapping("/save")
+    @PostMapping("/admin/save")
     public String saveForm(@Valid Ride ride, BindingResult result) {
         if (result.hasErrors()) {
             return "ride/form";
@@ -134,7 +134,7 @@ public class RideController {
         return "redirect:/rides/show?routeId=" + ride.getRoute().getId();
     }
 
-    @GetMapping("/del/{id}")
+    @GetMapping("/admin/del/{id}")
     public String delete(@PathVariable long id) {
         Long routeId = rideRepository.findOne(id).getRoute().getId();
         rideRepository.delete(id);

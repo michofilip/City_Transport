@@ -19,7 +19,7 @@
                 <div class="row">
                     <div class="col-lg-6">
 
-                        <form:form role="form" action="/rides/save" modelAttribute="ride" method="POST">
+                        <form:form role="form" action="/rides/admin/save" modelAttribute="ride" method="POST">
                             <form:hidden path="id"/>
 
                             <div class="form-group">

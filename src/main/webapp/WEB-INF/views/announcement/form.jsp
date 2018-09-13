@@ -19,8 +19,9 @@
                 <div class="row">
                     <div class="col-lg-6">
 
-                        <form:form role="form" action="/announcements/save" modelAttribute="announcement" method="POST">
+                        <form:form role="form" action="/announcements/admin/save" modelAttribute="announcement" method="POST">
                             <form:hidden path="id"/>
+                            <form:hidden path="created"/>
 
                             <div class="form-group">
                                 Title

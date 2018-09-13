@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <jsp:include page="../header.jsp"/>
 
 <%--<div id="page-wrapper">--%>
@@ -9,21 +10,23 @@
     <!-- /.col-lg-12 -->
 </div>
 
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <form role="form" action="/rides/add" method="get">
-                            <button class="btn btn-default">New ride</button>
-                        </form>
+<sec:authorize access="hasRole('ADMIN')">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <form role="form" action="/rides/add" method="get">
+                                <button class="btn btn-default">New ride</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</sec:authorize>
 
 <div class="row">
     <div class="col-lg-12">
@@ -79,15 +82,17 @@
                     <tbody>
                     <c:forEach var="ride" items="${rides}">
                         <tr>
-                            <%--<td><c:out value="${ride.id}"/></td>--%>
+                                <%--<td><c:out value="${ride.id}"/></td>--%>
                             <td><c:out value="${ride.route.line.numberVariant}"/></td>
                             <td><c:out value="${ride.route.busstop.name}"/></td>
                             <td><c:out value="${ride.bus.id}"/></td>
                             <td><c:out value="${ride.arrivalTime}"/></td>
                             <td>
                                 <a href="/rides/details/<c:out value="${ride.id}"/>">Details</a>
-                                <a href="/rides/edit/<c:out value="${ride.id}"/>">Edit</a>
-                                <a href="/rides/del/<c:out value="${ride.id}"/>" class="confirm">Delete</a>
+                                <sec:authorize access="hasRole('ADMIN')">
+                                    <a href="/rides/admin/edit/<c:out value="${ride.id}"/>">Edit</a>
+                                    <a href="/rides/admin/del/<c:out value="${ride.id}"/>" class="confirm">Delete</a>
+                                </sec:authorize>
                             </td>
                         </tr>
                     </c:forEach>

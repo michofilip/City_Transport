@@ -20,7 +20,7 @@
                 <div class="row">
                     <div class="col-lg-6">
 
-                        <form:form role="form" action="/lines/save" modelAttribute="line" method="POST">
+                        <form:form role="form" action="/lines/admin/save" modelAttribute="line" method="POST">
                             <form:hidden path="id"/>
 
                             Number
@@ -58,23 +58,23 @@
                                             <a href="/busstops/details/${route.busstop.id}"><c:out
                                                     value="${route.busstop.name}"/></a>
 
-                                            <a href="/lines/addBusstop/${line.id}/${route.orderNo}" class=" fa fa-plus">
+                                            <a href="/lines/admin/addBusstop/${line.id}/${route.orderNo}" class=" fa fa-plus">
                                                     <%--Add before--%>
                                             </a>
 
                                             <c:if test="${!varStatus.first}">
-                                                <a href="/lines/moveUp/${route.id}" class=" fa fa-arrow-up">
+                                                <a href="/lines/admin/moveUp/${route.id}" class=" fa fa-arrow-up">
                                                         <%--Move up--%>
                                                 </a>
                                             </c:if>
 
                                             <c:if test="${!varStatus.last}">
-                                                <a href="/lines/moveDown/${route.id}" class=" fa fa-arrow-down">
+                                                <a href="/lines/admin/moveDown/${route.id}" class=" fa fa-arrow-down">
                                                         <%--Move down--%>
                                                 </a>
                                             </c:if>
 
-                                            <a href="/lines/removeBusstop/${route.id}" class=" fa fa-trash-o">
+                                            <a href="/lines/admin/removeBusstop/${route.id}" class=" fa fa-trash-o confirm">
                                                     <%--Remove--%>
                                             </a>
                                         </li>
@@ -87,7 +87,7 @@
                                 <div class="panel-heading">
                                     <li>
                                             <%--<a href="/lines/addBusstop/${line.id}/${busstopCount + 1}">--%>
-                                        <a href="/lines/addBusstop/${line.id}/-1" class=" fa fa-plus">
+                                        <a href="/lines/admin/addBusstop/${line.id}/-1" class=" fa fa-plus">
                                                 <%--Add new--%>
                                         </a>
                                     </li>

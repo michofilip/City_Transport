@@ -41,20 +41,20 @@ public class BusController {
         return "bus/details";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/admin/add")
     public String add(Model model) {
         model.addAttribute("bus", new Bus());
         return "bus/form";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/admin/edit/{id}")
     public String edit(@PathVariable long id, Model model) {
         Bus bus = busRepository.findOne(id);
         model.addAttribute("bus", bus);
         return "bus/form";
     }
 
-    @PostMapping("/save")
+    @PostMapping("/admin/save")
     public String saveForm(@Valid Bus bus, BindingResult result) {
         if (result.hasErrors()) {
             return "bus/form";
@@ -63,7 +63,7 @@ public class BusController {
         return "redirect:/buses/";
     }
 
-    @GetMapping("/del/{id}")
+    @GetMapping("/admin/del/{id}")
     public String delete(@PathVariable long id, RedirectAttributes redirectAttributes) {
         if (rideRepository.findByBus(busRepository.findOne(id)).isEmpty()) {
             busRepository.delete(id);

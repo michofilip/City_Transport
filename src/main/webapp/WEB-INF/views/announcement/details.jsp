@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <jsp:include page="../header.jsp"/>
 
 <%--<div id="page-wrapper">--%>
@@ -42,8 +43,10 @@
                 </table>
             </div>
             <!-- /.table-responsive -->
-            <a href="/announcements/edit/<c:out value="${announcement.id}"/>">Edit</a>
-            <a href="/announcements/del/<c:out value="${announcement.id}"/>" class="confirm">Delete</a>
+            <sec:authorize access="hasRole('ADMIN')">
+                <a href="/announcements/admin/edit/<c:out value="${announcement.id}"/>">Edit</a>
+                <a href="/announcements/admin/del/<c:out value="${announcement.id}"/>" class="confirm">Delete</a>
+            </sec:authorize>
         </div>
         <!-- /.panel-body -->
     </div>

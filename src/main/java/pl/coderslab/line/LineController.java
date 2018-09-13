@@ -63,14 +63,14 @@ public class LineController {
         return "line/details";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/admin/add")
     public String add(Model model) {
         model.addAttribute("line", new Line());
         model.addAttribute("edit", false);
         return "line/form";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/admin/edit/{id}")
     public String edit(@PathVariable long id, Model model) {
         Line line = lineRepository.findOne(id);
         List<Route> routes = routeRepository.findByLine(line);
@@ -82,7 +82,7 @@ public class LineController {
         return "line/form";
     }
 
-    @PostMapping("/save")
+    @PostMapping("/admin/save")
     public String saveForm(@Valid Line line, BindingResult result) {
         if (result.hasErrors()) {
             return "line/form";
@@ -91,7 +91,7 @@ public class LineController {
         return "redirect:/lines/";
     }
 
-    @GetMapping("/del/{id}")
+    @GetMapping("/admin/del/{id}")
     public String delete(@PathVariable long id, RedirectAttributes redirectAttributes) {
         if (routeRepository.findByLine(lineRepository.findOne(id)).isEmpty()) {
             lineRepository.delete(id);
@@ -102,7 +102,7 @@ public class LineController {
         return "redirect:/lines/";
     }
 
-    @GetMapping("/addBusstop/{lineId}/{orderNo}")
+    @GetMapping("/admin/addBusstop/{lineId}/{orderNo}")
     public String addBusstop(@PathVariable long lineId, @PathVariable double orderNo, Model model) {
         Route route = new Route();
 
@@ -118,7 +118,7 @@ public class LineController {
         return "line/selectBusstop";
     }
 
-    @PostMapping("/addBusstop/save")
+    @PostMapping("/admin/addBusstop/save")
     public String addBusstop(@Valid Route route, BindingResult result) {
         if (result.hasErrors()) {
             return "line/selectBusstop";
@@ -130,10 +130,10 @@ public class LineController {
         routeRepository.save(route);
         reorderBusstops(line);
 
-        return "redirect:/lines/edit/" + line.getId().toString();
+        return "redirect:/lines/admin/edit/" + line.getId().toString();
     }
 
-    @GetMapping("/removeBusstop/{routeId}")
+    @GetMapping("/admin/removeBusstop/{routeId}")
     public String addBusstop(@PathVariable long routeId, RedirectAttributes redirectAttributes) {
         Route route = routeRepository.findOne(routeId);
         Line line = route.getLine();
@@ -144,10 +144,10 @@ public class LineController {
             redirectAttributes.addFlashAttribute("message", "Cannot detach busstop from line. Remove schedules first.");
         }
 
-        return "redirect:/lines/edit/" + line.getId().toString();
+        return "redirect:/lines/admin/edit/" + line.getId().toString();
     }
 
-    @GetMapping("/moveUp/{routeId}")
+    @GetMapping("/admin/moveUp/{routeId}")
     public String moveBusstopUp(@PathVariable long routeId) {
         Route route = routeRepository.findOne(routeId);
         Line line = route.getLine();
@@ -157,10 +157,10 @@ public class LineController {
         routeRepository.save(route);
         reorderBusstops(line);
 
-        return "redirect:/lines/edit/" + line.getId().toString();
+        return "redirect:/lines/admin/edit/" + line.getId().toString();
     }
 
-    @GetMapping("/moveDown/{routeId}")
+    @GetMapping("/admin/moveDown/{routeId}")
     public String moveBusstop(@PathVariable long routeId) {
         Route route = routeRepository.findOne(routeId);
         Line line = route.getLine();
@@ -170,7 +170,7 @@ public class LineController {
         routeRepository.save(route);
         reorderBusstops(line);
 
-        return "redirect:/lines/edit/" + line.getId().toString();
+        return "redirect:/lines/admin/edit/" + line.getId().toString();
     }
 
     private void reorderBusstops(Line line) {

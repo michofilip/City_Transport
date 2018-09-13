@@ -1,10 +1,10 @@
 package pl.coderslab.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import pl.coderslab.announcement.Announcement;
 import pl.coderslab.announcement.AnnouncementRepository;
 import pl.coderslab.bus.Bus;
@@ -13,10 +13,12 @@ import pl.coderslab.busstop.Busstop;
 import pl.coderslab.busstop.BusstopRepository;
 import pl.coderslab.line.Line;
 import pl.coderslab.line.LineRepository;
+import pl.coderslab.model.User;
 import pl.coderslab.ride.Ride;
 import pl.coderslab.ride.RideRepository;
 import pl.coderslab.route.Route;
 import pl.coderslab.route.RouteRepository;
+import pl.coderslab.service.UserService;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -35,7 +37,15 @@ public class IndexController {
     private final RideRepository rideRepository;
     private final RouteRepository routeRepository;
 
-    public IndexController(AnnouncementRepository announcementRepository, BusRepository busRepository, BusstopRepository busstopRepository, LineRepository lineRepository, RideRepository rideRepository, RouteRepository routeRepository) {
+    @Autowired
+    private UserService userService;
+
+    public IndexController(AnnouncementRepository announcementRepository,
+                           BusRepository busRepository,
+                           BusstopRepository busstopRepository,
+                           LineRepository lineRepository,
+                           RideRepository rideRepository,
+                           RouteRepository routeRepository) {
         this.announcementRepository = announcementRepository;
         this.busRepository = busRepository;
         this.busstopRepository = busstopRepository;
@@ -54,10 +64,14 @@ public class IndexController {
         return "index1";
     }
 
-    @GetMapping("/admin")
-    @ResponseBody
-    public String admin() {
-        return "admin";
+    @GetMapping(value = {"/login"})
+    public String login() {
+        return "admin/login";
+    }
+
+    @GetMapping(value = {"/admin/logout"})
+    public String logout() {
+        return "admin/logout";
     }
 
     @GetMapping("/generate")
@@ -70,6 +84,13 @@ public class IndexController {
         busRepository.deleteAll();
         busstopRepository.deleteAll();
         lineRepository.deleteAll();
+
+
+        User user = new User();
+        user.setUsername("admin");
+        user.setPassword("admin");
+        userService.saveUser(user);
+
 
         Bus bus1 = new Bus("abc1234");
         Bus bus2 = new Bus("def4321");

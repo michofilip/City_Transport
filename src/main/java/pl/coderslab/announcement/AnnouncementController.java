@@ -40,30 +40,32 @@ public class AnnouncementController {
         return "announcement/details";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/admin/add")
     public String add(Model model) {
         model.addAttribute("announcement", new Announcement());
         return "announcement/form";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/admin/edit/{id}")
     public String edit(@PathVariable long id, Model model) {
         Announcement announcement = announcementRepository.findOne(id);
         model.addAttribute("announcement", announcement);
         return "announcement/form";
     }
 
-    @PostMapping("/save")
+    @PostMapping("/admin/save")
     public String saveForm(@Valid Announcement announcement, BindingResult result) {
         if (result.hasErrors()) {
             return "announcement/form";
         }
-        announcement.setCreated(LocalDateTime.now());
+        if (announcement.getCreated() == null) {
+            announcement.setCreated(LocalDateTime.now());
+        }
         announcementRepository.save(announcement);
         return "redirect:/announcements/";
     }
 
-    @GetMapping("/del/{id}")
+    @GetMapping("/admin/del/{id}")
     public String delete(@PathVariable long id, RedirectAttributes redirectAttributes) {
 //        if (rideRepository.findByBus(busRepository.findOne(id)).isEmpty()) {
 //             busRepository.delete(id);

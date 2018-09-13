@@ -19,7 +19,7 @@
                 <div class="row">
                     <div class="col-lg-6">
 
-                        <form:form role="form" action="/lines/addBusstop/save" modelAttribute="route" method="POST">
+                        <form:form role="form" action="/lines/admin/addBusstop/save" modelAttribute="route" method="POST">
                             <form:hidden path="id"/>
 
                             <form:hidden path="orderNo"/>

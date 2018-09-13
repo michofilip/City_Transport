@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <jsp:include page="../header.jsp"/>
 
 <%--<div id="page-wrapper">--%>
@@ -23,8 +24,8 @@
                 <table class="table table-striped table-bordered table-hover">
                     <tbody>
                     <%--<tr>--%>
-                        <%--<td>ID</td>--%>
-                        <%--<td><c:out value="${ride.id}"/></td>--%>
+                    <%--<td>ID</td>--%>
+                    <%--<td><c:out value="${ride.id}"/></td>--%>
                     <%--</tr>--%>
                     <%--<tr>--%>
                     <%--<td>Route</td>--%>
@@ -50,8 +51,10 @@
                 </table>
             </div>
             <!-- /.table-responsive -->
-            <a href="/rides/edit/<c:out value="${ride.id}"/>">Edit</a>
-            <a href="/rides/del/<c:out value="${ride.id}"/>" class="confirm">Delete</a>
+            <sec:authorize access="hasRole('ADMIN')">
+                <a href="/rides/admin/edit/<c:out value="${ride.id}"/>">Edit</a>
+                <a href="/rides/admin/del/<c:out value="${ride.id}"/>" class="confirm">Delete</a>
+            </sec:authorize>
         </div>
         <!-- /.panel-body -->
     </div>

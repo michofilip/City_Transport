@@ -43,8 +43,11 @@
                     <c:forEach items="${announcements}" var="announcement">
                         <tr>
                                 <%--<td><c:out value="${announcement.id}"/></td>--%>
-                            <td><c:out value="${announcement.createdDate}"/> <c:out
-                                    value="${announcement.createdTime}"/></td>
+                            <td>
+                                <c:out value="${announcement.createdDate}"/>
+                                <br>
+                                <c:out value="${announcement.createdTime}"/>
+                            </td>
                             <td>
                                 <a href="/announcements/details/<c:out value="${announcement.id}"/>">
                                     <c:out value="${announcement.title}"/>
