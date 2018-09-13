@@ -41,40 +41,64 @@
     </div>
 
     <div class="row">
+
         <c:if test="${edit}">
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Busstops
+                    </div>
+                    <div class="panel-body">
+                        <ol>
+                            <c:forEach var="route" items="${routes}" varStatus="varStatus">
 
-            Busstops
-            <ol>
-                <c:forEach var="route" items="${routes}">
-                    <li>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <li>
+                                            <a href="/busstops/details/${route.busstop.id}"><c:out
+                                                    value="${route.busstop.name}"/></a>
 
-                        <a href="/busstops/details/${route.busstop.id}"><c:out value="${route.busstop.name}"/></a>
+                                            <a href="/lines/addBusstop/${line.id}/${route.orderNo}" class=" fa fa-plus">
+                                                    <%--Add before--%>
+                                            </a>
 
-                        <a href="/lines/addBusstop/${line.id}/${route.orderNo}" class=" fa fa-plus">
-                                <%--Add before--%>
-                        </a>
+                                            <c:if test="${!varStatus.first}">
+                                                <a href="/lines/moveUp/${route.id}" class=" fa fa-arrow-up">
+                                                        <%--Move up--%>
+                                                </a>
+                                            </c:if>
 
-                        <a href="/lines/moveUp/${route.id}" class=" fa fa-arrow-up">
-                                <%--Move up--%>
-                        </a>
-                        <a href="/lines/moveDown/${route.id}" class=" fa fa-arrow-down">
-                                <%--Move down--%>
-                        </a>
+                                            <c:if test="${!varStatus.last}">
+                                                <a href="/lines/moveDown/${route.id}" class=" fa fa-arrow-down">
+                                                        <%--Move down--%>
+                                                </a>
+                                            </c:if>
 
-                        <a href="/lines/removeBusstop/${route.id}" class=" fa fa-trash-o">
-                                <%--Remove--%>
-                        </a>
-                    </li>
-                </c:forEach>
-                <li>
-                        <%--<a href="/lines/addBusstop/${line.id}/${busstopCount + 1}">--%>
-                    <a href="/lines/addBusstop/${line.id}/-1" class=" fa fa-plus">
-                            <%--Add new--%>
-                    </a>
-                </li>
-            </ol>
+                                            <a href="/lines/removeBusstop/${route.id}" class=" fa fa-trash-o">
+                                                    <%--Remove--%>
+                                            </a>
+                                        </li>
+                                    </div>
+                                </div>
 
+                            </c:forEach>
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <li>
+                                            <%--<a href="/lines/addBusstop/${line.id}/${busstopCount + 1}">--%>
+                                        <a href="/lines/addBusstop/${line.id}/-1" class=" fa fa-plus">
+                                                <%--Add new--%>
+                                        </a>
+                                    </li>
+                                </div>
+                            </div>
+                        </ol>
+                    </div>
+                </div>
+            </div>
         </c:if>
+
     </div>
 
 </div>

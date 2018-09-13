@@ -39,7 +39,7 @@
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
                     <tr>
-                        <th>ID</th>
+                        <%--<th>ID</th>--%>
                         <th>Name</th>
                         <th>Actions</th>
                     </tr>
@@ -47,7 +47,7 @@
                     <tbody>
                     <c:forEach var="busstop" items="${busstops}">
                         <tr>
-                            <td><c:out value="${busstop.id}"/></td>
+                            <%--<td><c:out value="${busstop.id}"/></td>--%>
                             <td><c:out value="${busstop.name}"/></td>
                             <td>
                                 <a href="/busstops/details/<c:out value="${busstop.id}"/>">Details</a>

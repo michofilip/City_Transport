@@ -67,7 +67,7 @@
                     <thead>
                     <tr>
                     <tr>
-                        <th>ID</th>
+                        <%--<th>ID</th>--%>
                         <th>Line</th>
                         <th>Busstop</th>
                         <th>Bus</th>
@@ -79,7 +79,7 @@
                     <tbody>
                     <c:forEach var="ride" items="${rides}">
                         <tr>
-                            <td><c:out value="${ride.id}"/></td>
+                            <%--<td><c:out value="${ride.id}"/></td>--%>
                             <td><c:out value="${ride.route.line.numberVariant}"/></td>
                             <td><c:out value="${ride.route.busstop.name}"/></td>
                             <td><c:out value="${ride.bus.id}"/></td>

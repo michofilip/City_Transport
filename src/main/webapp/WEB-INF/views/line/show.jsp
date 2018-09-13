@@ -39,7 +39,7 @@
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
                     <tr>
-                        <th>ID</th>
+                        <%--<th>ID</th>--%>
                         <th>Number</th>
                         <th>Variant</th>
                         <th>Actions</th>
@@ -48,7 +48,7 @@
                     <tbody>
                     <c:forEach var="line" items="${lines}">
                         <tr>
-                            <td><c:out value="${line.id}"/></td>
+                            <%--<td><c:out value="${line.id}"/></td>--%>
                             <td><c:out value="${line.number}"/></td>
                             <td><c:out value="${line.variant}"/></td>
                             <td>

@@ -22,10 +22,10 @@
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-hover">
                     <tbody>
-                    <tr>
-                        <td>ID</td>
-                        <td><c:out value="${busstop.id}"/></td>
-                    </tr>
+                    <%--<tr>--%>
+                    <%--<td>ID</td>--%>
+                    <%--<td><c:out value="${busstop.id}"/></td>--%>
+                    <%--</tr>--%>
                     <tr>
                         <td>Name</td>
                         <td><c:out value="${busstop.name}"/></td>
@@ -44,23 +44,31 @@
 <!-- /.row -->
 
 <div class="row">
-    <ul>
-        <c:forEach var="line" items="${lines}">
-            <li>
+    <%--<ul>--%>
+    <c:forEach var="line" items="${lines}">
+        <div class="panel panel-default">
+                <%--<li>--%>
+            <div class="panel-heading">
                 <c:set var="hour" value="-1"/>
                 Line:
                 <a href="/lines/details/<c:out value="${line.id}"/>"><c:out value="${line.numberVariant}"/></a>
                 <br>
+                Route:
                 <c:forEach var="busstop" items="${busstops.get(line.id)}" varStatus="varStatus">
                     <a href="/busstops/details/<c:out value="${busstop.id}"/>"> ${busstop.name}</a>
                     <c:if test="${!varStatus.last}">
                         <span class="fa fa-long-arrow-right "></span>
                     </c:if>
                 </c:forEach>
+            </div>
 
-                <c:forEach var="schedule" items="${schedules.get(line.id)}">
+            <div class="panel-body">
+                <c:forEach var="schedule" items="${schedules.get(line.id)}" varStatus="varStatus">
                     <c:if test="${hour != schedule.arrivalTime.hour}">
-                        <br>
+                        <c:if test="${!varStatus.first}">
+                            <br>
+                        </c:if>
+
                         <c:out value="${schedule.arrivalTime.hour}"/>:
                         <c:set var="hour" value="${schedule.arrivalTime.hour}"/>
                     </c:if>
@@ -79,10 +87,12 @@
 
                     </c:if>
                 </c:forEach>
+            </div>
 
-            </li>
-        </c:forEach>
-    </ul>
+                <%--</li>--%>
+        </div>
+    </c:forEach>
+    <%--</ul>--%>
 </div>
 
 <%--<ul>--%>

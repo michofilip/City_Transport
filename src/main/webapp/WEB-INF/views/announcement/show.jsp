@@ -50,16 +50,23 @@
                     <tbody>
                     <c:forEach items="${announcements}" var="announcement">
                         <tr>
-                            <%--<td><c:out value="${announcement.id}"/></td>--%>
-                            <td><c:out value="${announcement.created}"/></td>
-                            <td><c:out value="${announcement.title}"/></td>
+                                <%--<td><c:out value="${announcement.id}"/></td>--%>
+                            <td><c:out value="${announcement.createdDate}"/> <c:out
+                                    value="${announcement.createdTime}"/></td>
                             <td>
-                                <c:if test="${fn:length(announcement.content) <= 200}">
-                                    <c:out value="${announcement.content}"/>
-                                </c:if>
-                                <c:if test="${fn:length(announcement.content) > 300}">
-                                    <c:out value="${fn:substring(announcement.content, 0, 300)}"/>...
-                                </c:if>
+                                <a href="/announcements/details/<c:out value="${announcement.id}"/>">
+                                    <c:out value="${announcement.title}"/>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/announcements/details/<c:out value="${announcement.id}"/>">
+                                    <c:if test="${fn:length(announcement.content) <= 200}">
+                                        <c:out value="${announcement.content}"/>
+                                    </c:if>
+                                    <c:if test="${fn:length(announcement.content) > 300}">
+                                        <c:out value="${fn:substring(announcement.content, 0, 300)}"/>...
+                                    </c:if>
+                                </a>
                             </td>
                                 <%--<td><c:out value="${fn.substring(announcement.content, 0, 200)}"/>...</td>--%>
                             <td>

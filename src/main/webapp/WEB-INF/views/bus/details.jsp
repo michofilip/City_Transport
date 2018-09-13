@@ -22,10 +22,10 @@
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-hover">
                     <tbody>
-                    <tr>
-                        <td>ID</td>
-                        <td><c:out value="${bus.id}"/></td>
-                    </tr>
+                    <%--<tr>--%>
+                        <%--<td>ID</td>--%>
+                        <%--<td><c:out value="${bus.id}"/></td>--%>
+                    <%--</tr>--%>
                     <tr>
                         <td>Plate number</td>
                         <td><c:out value="${bus.plateNumber}"/></td>

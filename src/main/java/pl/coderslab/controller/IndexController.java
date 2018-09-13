@@ -2,8 +2,11 @@ package pl.coderslab.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import pl.coderslab.announcement.Announcement;
+import pl.coderslab.announcement.AnnouncementRepository;
 import pl.coderslab.bus.Bus;
 import pl.coderslab.bus.BusRepository;
 import pl.coderslab.busstop.Busstop;
@@ -25,18 +28,25 @@ import java.util.List;
 //@AllArgsConstructor
 public class IndexController {
 
+    private final AnnouncementRepository announcementRepository;
     private final BusRepository busRepository;
     private final BusstopRepository busstopRepository;
     private final LineRepository lineRepository;
     private final RideRepository rideRepository;
     private final RouteRepository routeRepository;
 
-    public IndexController(BusRepository busRepository, BusstopRepository busstopRepository, LineRepository lineRepository, RideRepository rideRepository, RouteRepository routeRepository) {
+    public IndexController(AnnouncementRepository announcementRepository, BusRepository busRepository, BusstopRepository busstopRepository, LineRepository lineRepository, RideRepository rideRepository, RouteRepository routeRepository) {
+        this.announcementRepository = announcementRepository;
         this.busRepository = busRepository;
         this.busstopRepository = busstopRepository;
         this.lineRepository = lineRepository;
         this.rideRepository = rideRepository;
         this.routeRepository = routeRepository;
+    }
+
+    @ModelAttribute("announcements")
+    public List<Announcement> announcements() {
+        return announcementRepository.find5();
     }
 
     @GetMapping("/")

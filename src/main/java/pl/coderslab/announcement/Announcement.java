@@ -5,7 +5,9 @@ import lombok.ToString;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "announcements")
@@ -31,5 +33,13 @@ public class Announcement {
     public Announcement(String title, String content) {
         this.title = title;
         this.content = content;
+    }
+
+    public LocalDate getCreatedDate() {
+        return created.toLocalDate();
+    }
+
+    public LocalTime getCreatedTime() {
+        return created.toLocalTime();
     }
 }
