@@ -55,15 +55,17 @@
         <div class="panel-heading">
             Busstops
         </div>
+
         <div class="panel-body">
             <ol>
                 <c:forEach var="busstop" items="${busstops}">
                     <c:set var="hour" value="-1"/>
                     <li>
                         <div class="panel panel-default">
-                            <div class="panel-heading">
+                            <div class="panel-heading custSlide custUp">
                                 <a href="/busstops/details/<c:out value="${busstop.id}"/>"> ${busstop.name}</a>
                             </div>
+                            <%--<span class="custSlide">--%>
                                 <%--<c:out value="${busstop.name}"/>--%>
                             <div class="panel-body">
                                 <c:forEach var="schedule" items="${schedules.get(busstop.id)}" varStatus="varStatus">
@@ -88,11 +90,13 @@
                                     </c:if>
                                 </c:forEach>
                             </div>
+                             <%--</span>--%>
                         </div>
                     </li>
                 </c:forEach>
             </ol>
         </div>
+
     </div>
 </div>
 

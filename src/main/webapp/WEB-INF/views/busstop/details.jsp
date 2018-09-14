@@ -51,7 +51,7 @@
     <c:forEach var="line" items="${lines}">
         <div class="panel panel-default">
                 <%--<li>--%>
-            <div class="panel-heading">
+            <div class="panel-heading custSlide custUp">
                 <c:set var="hour" value="-1"/>
                 Line:
                 <a href="/lines/details/<c:out value="${line.id}"/>"><c:out value="${line.numberVariant}"/></a>

@@ -5,6 +5,14 @@ $(document).on("click", "a.confirm", function (e) {
     }
 });
 
+$(document).on("click", ".custSlide", function (e) {
+    $(this).next().slideToggle()
+});
+
+$(function () {
+    $(".custUp").next().hide()
+})
+
 
 // $(document).ready(function () { $('.datepic').datepicker({"format":"yyyy-mm-dd"
 // });
