@@ -12,13 +12,13 @@
 <!-- /.row -->
 
 <!-- /.row -->
-<div class="row">
-    <a href="/generate">Clear and fill db</a>
-    <br>
-    DROP DATABASE IF EXISTS city_transport; CREATE DATABASE city_transport DEFAULT CHARACTER SET utf8mb4; USE
-    city_transport;
-    <!-- /.col-lg-4 -->
-</div>
+<%--<div class="row">--%>
+    <%--<a href="/generate">Clear and fill db</a>--%>
+    <%--<br>--%>
+    <%--DROP DATABASE IF EXISTS city_transport; CREATE DATABASE city_transport DEFAULT CHARACTER SET utf8mb4; USE--%>
+    <%--city_transport;--%>
+    <%--<!-- /.col-lg-4 -->--%>
+<%--</div>--%>
 
 
 <div class="row">

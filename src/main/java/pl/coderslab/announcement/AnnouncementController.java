@@ -67,9 +67,17 @@ public class AnnouncementController {
         if (result.hasErrors()) {
             return "announcement/form";
         }
-        if (announcement.getCreated() == null) {
-            announcement.setCreated(LocalDateTime.now());
-        }
+//        if (announcement.getCreated() == null) {
+//            announcement.setCreated(LocalDateTime.now());
+//        } else {
+//            Announcement one = announcementRepository.findOne(announcement.getId());
+//            announcement.setCreated(one.getCreated());
+////            LocalDateTime created = announcement.getCreated();
+////            announcement.setCreated(
+////                    LocalDateTime.of(created.getYear(), created.getMonth(), created.getDayOfMonth(),
+////                            created.getHour(), created.getMinute(), created.getSecond())
+////            );
+//        }
         announcementRepository.save(announcement);
         return "redirect:/announcements/";
     }

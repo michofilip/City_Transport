@@ -3,8 +3,10 @@ package pl.coderslab.announcement;
 import lombok.Data;
 import lombok.ToString;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -18,6 +20,8 @@ public class Announcement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime created;
 
     @NotBlank
@@ -39,6 +43,11 @@ public class Announcement {
     public Announcement(String title, String content) {
         this.title = title;
         this.content = content;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        this.created = LocalDateTime.now();
     }
 
     public LocalDate getCreatedDate() {
