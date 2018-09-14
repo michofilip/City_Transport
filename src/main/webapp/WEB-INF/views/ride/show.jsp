@@ -50,6 +50,24 @@
                             <input type="submit" value="submit">
                         </form>
                     </div>
+
+                    <div class="col-lg-6">
+                        <form role="form" action="/rides/showB" method="get">
+                            <select name="busId">
+                                <option value="-1">------</option>
+                                <c:forEach var="bus" items="${buses}">
+                                    <c:if test="${bus.id == busId}">
+                                        <option value="${bus.id}" selected>${bus.id}</option>
+                                    </c:if>
+                                    <c:if test="${bus.id != busId}">
+                                        <option value="${bus.id}">${bus.id}</option>
+                                    </c:if>
+                                </c:forEach>
+                            </select>
+
+                            <input type="submit" value="submit">
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -92,9 +110,9 @@
                             <td><a href="/buses/details/<c:out value="${ride.bus.id}"/>"> ${ride.bus.id}</a></td>
 
 
-                            <%--<td><c:out value="${ride.route.line.numberVariant}"/></td>--%>
-                            <%--<td><c:out value="${ride.route.busstop.name}"/></td>--%>
-                            <%--<td><c:out value="${ride.bus.id}"/></td>--%>
+                                <%--<td><c:out value="${ride.route.line.numberVariant}"/></td>--%>
+                                <%--<td><c:out value="${ride.route.busstop.name}"/></td>--%>
+                                <%--<td><c:out value="${ride.bus.id}"/></td>--%>
                             <td><c:out value="${ride.arrivalTime}"/></td>
                             <td>
                                 <a href="/rides/details/<c:out value="${ride.id}"/>">Details</a>

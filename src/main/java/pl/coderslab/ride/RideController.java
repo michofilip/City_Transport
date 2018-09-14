@@ -93,6 +93,16 @@ public class RideController {
         return "ride/show";
     }
 
+    @GetMapping("/showB")
+    public String showAllB(@RequestParam Long busId, Model model) {
+        Bus bus = busRepository.findOne(busId);
+        List<Ride> rides = rideRepository.findByBusSorted(bus);
+
+        model.addAttribute("rides", rides);
+        model.addAttribute("busId", busId);
+        return "ride/show";
+    }
+
 //    @GetMapping("/show")
 //    public String showAll(@RequestParam Long busstopId, @RequestParam Long lineId, Model model) {
 ////        if (busstopId != null && lineId != null) {
