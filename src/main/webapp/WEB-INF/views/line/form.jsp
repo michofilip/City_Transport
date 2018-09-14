@@ -53,12 +53,14 @@
                             <c:forEach var="route" items="${routes}" varStatus="varStatus">
 
                                 <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <li>
+                                    <li>
+                                        <div class="panel-heading">
+
                                             <a href="/busstops/details/${route.busstop.id}"><c:out
                                                     value="${route.busstop.name}"/></a>
 
-                                            <a href="/lines/admin/addBusstop/${line.id}/${route.orderNo}" class=" fa fa-plus">
+                                            <a href="/lines/admin/addBusstop/${line.id}/${route.orderNo}"
+                                               class=" fa fa-plus">
                                                     <%--Add before--%>
                                             </a>
 
@@ -74,24 +76,28 @@
                                                 </a>
                                             </c:if>
 
-                                            <a href="/lines/admin/removeBusstop/${route.id}" class=" fa fa-trash-o confirm">
+                                            <a href="/lines/admin/removeBusstop/${route.id}"
+                                               class=" fa fa-trash-o confirm">
                                                     <%--Remove--%>
                                             </a>
-                                        </li>
-                                    </div>
+
+                                        </div>
+                                    </li>
                                 </div>
 
                             </c:forEach>
 
                             <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <li>
+                                <li>
+                                    <div class="panel-heading">
+
                                             <%--<a href="/lines/addBusstop/${line.id}/${busstopCount + 1}">--%>
                                         <a href="/lines/admin/addBusstop/${line.id}/-1" class=" fa fa-plus">
                                                 <%--Add new--%>
                                         </a>
-                                    </li>
-                                </div>
+
+                                    </div>
+                                </li>
                             </div>
                         </ol>
                     </div>
