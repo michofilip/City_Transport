@@ -29,7 +29,11 @@
                     </tr>
                     <tr>
                         <td>Created</td>
-                        <td><c:out value="${announcement.created}"/></td>
+                        <%--<td><c:out value="${announcement.created}"/></td>--%>
+                        <td>
+                            <c:out value="${announcement.createdDate}"/>
+                            <c:out value="${announcement.createdTime}"/>
+                        </td>
                     </tr>
                     <tr>
                         <td>Title</td>

@@ -28,6 +28,30 @@
         </div>
     </div>
 </sec:authorize>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <form role="form" action="/announcements/" method="get">
+                            <input type="submit" value="show all">
+                        </form>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <form role="form" action="/announcements/show" method="get">
+                            <input type="text" name="search" value="${search}">
+
+                            <input type="submit" value="search">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- /.row -->
 
 <!-- /.row -->

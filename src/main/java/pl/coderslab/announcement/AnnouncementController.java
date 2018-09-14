@@ -33,6 +33,15 @@ public class AnnouncementController {
         return "announcement/show";
     }
 
+    @GetMapping("/show")
+    public String showAll(@RequestParam String search, Model model) {
+        if (search != null) {
+            model.addAttribute("announcements", announcementRepository.findByTitleOrContent(search));
+            model.addAttribute("search", search);
+        }
+        return "announcement/show";
+    }
+
     @GetMapping("/details/{id}")
     public String details(@PathVariable Long id, Model model) {
         Announcement announcement = announcementRepository.findOne(id);

@@ -30,6 +30,12 @@ public class Announcement {
     public Announcement() {
     }
 
+    public Announcement(LocalDateTime created, String title, String content) {
+        this.created = created;
+        this.title = title;
+        this.content = content;
+    }
+
     public Announcement(String title, String content) {
         this.title = title;
         this.content = content;

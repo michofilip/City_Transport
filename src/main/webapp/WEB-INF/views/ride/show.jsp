@@ -17,7 +17,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-6">
-                            <form role="form" action="/rides/add" method="get">
+                            <form role="form" action="/rides/admin/add" method="get">
                                 <button class="btn btn-default">New ride</button>
                             </form>
                         </div>
@@ -83,9 +83,18 @@
                     <c:forEach var="ride" items="${rides}">
                         <tr>
                                 <%--<td><c:out value="${ride.id}"/></td>--%>
-                            <td><c:out value="${ride.route.line.numberVariant}"/></td>
-                            <td><c:out value="${ride.route.busstop.name}"/></td>
-                            <td><c:out value="${ride.bus.id}"/></td>
+                            <td>
+                                <a href="/lines/details/<c:out value="${ride.route.line.id}"/>"> ${ride.route.line.numberVariant}</a>
+                            </td>
+                            <td>
+                                <a href="/busstops/details/<c:out value="${ride.route.busstop.id}"/>"> ${ride.route.busstop.name}</a>
+                            </td>
+                            <td><a href="/buses/details/<c:out value="${ride.bus.id}"/>"> ${ride.bus.id}</a></td>
+
+
+                            <%--<td><c:out value="${ride.route.line.numberVariant}"/></td>--%>
+                            <%--<td><c:out value="${ride.route.busstop.name}"/></td>--%>
+                            <%--<td><c:out value="${ride.bus.id}"/></td>--%>
                             <td><c:out value="${ride.arrivalTime}"/></td>
                             <td>
                                 <a href="/rides/details/<c:out value="${ride.id}"/>">Details</a>

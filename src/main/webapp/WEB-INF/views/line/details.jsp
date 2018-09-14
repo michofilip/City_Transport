@@ -73,7 +73,9 @@
                                         <c:if test="${!varStatus.first}">
                                             <br>
                                         </c:if>
-                                        <c:out value="${schedule.arrivalTime.hour}"/>:
+                                        <%--<c:out value="${schedule.arrivalTime.hour}"/>:--%>
+                                        <c:if test="${schedule.arrivalTime.hour < 10}">0</c:if><c:out
+                                            value="${schedule.arrivalTime.hour}"/> :
                                         <c:set var="hour" value="${schedule.arrivalTime.hour}"/>
                                     </c:if>
 

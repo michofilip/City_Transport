@@ -13,13 +13,17 @@ import pl.coderslab.busstop.Busstop;
 import pl.coderslab.busstop.BusstopRepository;
 import pl.coderslab.line.Line;
 import pl.coderslab.line.LineRepository;
+import pl.coderslab.model.Role;
 import pl.coderslab.model.User;
+import pl.coderslab.repository.RoleRepository;
+import pl.coderslab.repository.UserRepository;
 import pl.coderslab.ride.Ride;
 import pl.coderslab.ride.RideRepository;
 import pl.coderslab.route.Route;
 import pl.coderslab.route.RouteRepository;
 import pl.coderslab.service.UserService;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,6 +40,8 @@ public class IndexController {
     private final LineRepository lineRepository;
     private final RideRepository rideRepository;
     private final RouteRepository routeRepository;
+    private final RoleRepository roleRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     private UserService userService;
@@ -45,13 +51,17 @@ public class IndexController {
                            BusstopRepository busstopRepository,
                            LineRepository lineRepository,
                            RideRepository rideRepository,
-                           RouteRepository routeRepository) {
+                           RouteRepository routeRepository,
+                           RoleRepository roleRepository,
+                           UserRepository userRepository) {
         this.announcementRepository = announcementRepository;
         this.busRepository = busRepository;
         this.busstopRepository = busstopRepository;
         this.lineRepository = lineRepository;
         this.rideRepository = rideRepository;
         this.routeRepository = routeRepository;
+        this.roleRepository = roleRepository;
+        this.userRepository = userRepository;
     }
 
     @ModelAttribute("announcements")
@@ -79,11 +89,17 @@ public class IndexController {
 
         //        http://localhost:8080/
 
+        userRepository.deleteAll();
+        roleRepository.deleteAll();
+
+        announcementRepository.deleteAll();
         rideRepository.deleteAll();
         routeRepository.deleteAll();
         busRepository.deleteAll();
         busstopRepository.deleteAll();
         lineRepository.deleteAll();
+
+        roleRepository.save(new Role("ROLE_ADMIN"));
 
 
         User user = new User();
@@ -91,6 +107,21 @@ public class IndexController {
         user.setPassword("admin");
         userService.saveUser(user);
 
+        try {
+            announcementRepository.save(new Announcement(LocalDateTime.now(), "Very old", "Short content"));
+            Thread.sleep(1000);
+            announcementRepository.save(new Announcement(LocalDateTime.now(), "Old", "Short content"));
+            Thread.sleep(1000);
+            announcementRepository.save(new Announcement(LocalDateTime.now(), "Not so old", "Short content"));
+            Thread.sleep(1000);
+            announcementRepository.save(new Announcement(LocalDateTime.now(), "Long", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo ullamcorper a lacus vestibulum sed arcu non odio euismod. Felis eget nunc lobortis mattis aliquam faucibus. Dolor sit amet consectetur adipiscing elit duis tristique. Aliquam nulla facilisi cras fermentum odio eu. Mi bibendum neque egestas congue quisque egestas. A cras semper auctor neque vitae tempus quam pellentesque. Tortor dignissim convallis aenean et tortor. Est placerat in egestas erat imperdiet sed euismod nisi porta. Nec sagittis aliquam malesuada bibendum arcu. Eleifend quam adipiscing vitae proin sagittis. In pellentesque massa placerat duis ultricies lacus sed turpis. Egestas diam in arcu cursus euismod quis viverra. Tristique magna sit amet purus gravida quis blandit turpis cursus. Nulla pellentesque dignissim enim sit amet venenatis urna cursus. Sollicitudin ac orci phasellus egestas. Ut porttitor leo a diam. Mattis vulputate enim nulla aliquet porttitor lacus luctus accumsan. Dui accumsan sit amet nulla facilisi morbi."));
+            Thread.sleep(1000);
+            announcementRepository.save(new Announcement(LocalDateTime.now(), "Short", "Short content"));
+            Thread.sleep(1000);
+            announcementRepository.save(new Announcement(LocalDateTime.now(), "Recent", "Recent content"));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         Bus bus1 = new Bus("abc1234");
         Bus bus2 = new Bus("def4321");
@@ -152,34 +183,36 @@ public class IndexController {
         ));
         routeRepository.save(routes);
 
-        routeRepository.findByLine(lineWE).forEach(route -> rideRepository.save(new Ride(route, bus1, getTime())));
-        routeRepository.findByLine(lineWE).forEach(route -> rideRepository.save(new Ride(route, bus2, getTime())));
-        routeRepository.findByLine(lineWE).forEach(route -> rideRepository.save(new Ride(route, bus3, getTime())));
-        routeRepository.findByLine(lineWE).forEach(route -> rideRepository.save(new Ride(route, bus4, getTime())));
+        for (int i = 0; i < 10; i++) {
+            routeRepository.findByLine(lineWE).forEach(route -> rideRepository.save(new Ride(route, bus1, getTime())));
+            routeRepository.findByLine(lineWE).forEach(route -> rideRepository.save(new Ride(route, bus2, getTime())));
+            routeRepository.findByLine(lineWE).forEach(route -> rideRepository.save(new Ride(route, bus3, getTime())));
+            routeRepository.findByLine(lineWE).forEach(route -> rideRepository.save(new Ride(route, bus4, getTime())));
 
-        routeRepository.findByLine(lineEW).forEach(route -> rideRepository.save(new Ride(route, bus4, getTime())));
-        routeRepository.findByLine(lineEW).forEach(route -> rideRepository.save(new Ride(route, bus1, getTime())));
-        routeRepository.findByLine(lineEW).forEach(route -> rideRepository.save(new Ride(route, bus2, getTime())));
-        routeRepository.findByLine(lineEW).forEach(route -> rideRepository.save(new Ride(route, bus3, getTime())));
+            routeRepository.findByLine(lineEW).forEach(route -> rideRepository.save(new Ride(route, bus4, getTime())));
+            routeRepository.findByLine(lineEW).forEach(route -> rideRepository.save(new Ride(route, bus1, getTime())));
+            routeRepository.findByLine(lineEW).forEach(route -> rideRepository.save(new Ride(route, bus2, getTime())));
+            routeRepository.findByLine(lineEW).forEach(route -> rideRepository.save(new Ride(route, bus3, getTime())));
 
-        routeRepository.findByLine(lineNS).forEach(route -> rideRepository.save(new Ride(route, bus5, getTime())));
-        routeRepository.findByLine(lineNS).forEach(route -> rideRepository.save(new Ride(route, bus6, getTime())));
-        routeRepository.findByLine(lineNS).forEach(route -> rideRepository.save(new Ride(route, bus7, getTime())));
-        routeRepository.findByLine(lineNS).forEach(route -> rideRepository.save(new Ride(route, bus8, getTime())));
+            routeRepository.findByLine(lineNS).forEach(route -> rideRepository.save(new Ride(route, bus5, getTime())));
+            routeRepository.findByLine(lineNS).forEach(route -> rideRepository.save(new Ride(route, bus6, getTime())));
+            routeRepository.findByLine(lineNS).forEach(route -> rideRepository.save(new Ride(route, bus7, getTime())));
+            routeRepository.findByLine(lineNS).forEach(route -> rideRepository.save(new Ride(route, bus8, getTime())));
 
-        routeRepository.findByLine(lineSN).forEach(route -> rideRepository.save(new Ride(route, bus8, getTime())));
-        routeRepository.findByLine(lineSN).forEach(route -> rideRepository.save(new Ride(route, bus5, getTime())));
-        routeRepository.findByLine(lineSN).forEach(route -> rideRepository.save(new Ride(route, bus6, getTime())));
-        routeRepository.findByLine(lineSN).forEach(route -> rideRepository.save(new Ride(route, bus7, getTime())));
+            routeRepository.findByLine(lineSN).forEach(route -> rideRepository.save(new Ride(route, bus8, getTime())));
+            routeRepository.findByLine(lineSN).forEach(route -> rideRepository.save(new Ride(route, bus5, getTime())));
+            routeRepository.findByLine(lineSN).forEach(route -> rideRepository.save(new Ride(route, bus6, getTime())));
+            routeRepository.findByLine(lineSN).forEach(route -> rideRepository.save(new Ride(route, bus7, getTime())));
+        }
 
         return "redirect:/";
     }
 
-    private LocalTime time = LocalTime.of(8, 0);
+    private LocalTime time = LocalTime.of(5, 0);
 
     private LocalTime getTime() {
         LocalTime t = time;
-        time = time.plusMinutes(10);
+        time = time.plusMinutes(7);
         return t;
     }
 }

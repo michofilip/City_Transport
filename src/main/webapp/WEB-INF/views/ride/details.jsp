@@ -33,15 +33,22 @@
                     <%--</tr>--%>
                     <tr>
                         <td>Line</td>
-                        <td><c:out value="${ride.route.line.numberVariant}"/></td>
+                        <td>
+                            <a href="/lines/details/<c:out value="${ride.route.line.id}"/>"> ${ride.route.line.numberVariant}</a>
+                        </td>
+                        <%--<td><c:out value="${ride.route.line.numberVariant}"/></td>--%>
                     </tr>
                     <tr>
                         <td>Busstop</td>
-                        <td><c:out value="${ride.route.busstop.name}"/></td>
+                        <td>
+                            <a href="/busstops/details/<c:out value="${ride.route.busstop.id}"/>"> ${ride.route.busstop.name}</a>
+                        </td>
+                        <%--<td><c:out value="${ride.route.busstop.name}"/></td>--%>
                     </tr>
                     <tr>
                         <td>Bus</td>
-                        <td><c:out value="${ride.bus.id}"/></td>
+                        <td><a href="/buses/details/<c:out value="${ride.bus.id}"/>"> ${ride.bus.id}</a></td>
+                        <%--<td><c:out value="${ride.bus.id}"/></td>--%>
                     </tr>
                     <tr>
                         <td>Arrival time</td>
