@@ -71,7 +71,7 @@ public class IndexController {
 
     @GetMapping("/")
     public String index() {
-        return "index1";
+        return "index";
     }
 
     @GetMapping(value = {"/login"})
