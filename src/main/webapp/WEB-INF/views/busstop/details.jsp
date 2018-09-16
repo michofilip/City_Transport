@@ -79,13 +79,6 @@
                     </c:if>
 
                     <c:if test="${hour == schedule.arrivalTime.hour}">
-                        <%--<c:if test="${schedule.arrivalTime.minute < 10}">--%>
-                        <%--0<c:out value="${schedule.arrivalTime.minute}"/>--%>
-                        <%--</c:if>--%>
-                        <%--<c:if test="${schedule.arrivalTime.minute >= 10}">--%>
-                        <%--<c:out value="${schedule.arrivalTime.minute}"/>--%>
-                        <%--</c:if>--%>
-                        <%----%>
 
                         <c:if test="${schedule.arrivalTime.minute < 10}">0</c:if><c:out
                             value="${schedule.arrivalTime.minute}"/>
@@ -100,96 +93,4 @@
     <%--</ul>--%>
 </div>
 
-<%--<ul>--%>
-<%--<c:forEach var="line" items="${lines}">--%>
-<%--<li>--%>
-<%--<c:out value="${line.number}"/>--%>
-<%--<ul>--%>
-<%--<c:forEach var="schedule" items="${schedules.get(line.id)}">--%>
-<%--<li>--%>
-<%--<c:out value="${schedule.arrivalTime}"/>--%>
-<%--</li>--%>
-<%--</c:forEach>--%>
-<%--</ul>--%>
-<%--</li>--%>
-<%--</c:forEach>--%>
-<%--</ul>--%>
-
-<%--</div>--%>
-<!-- /#page-wrapper -->
-
 <jsp:include page="../footer.jsp"/>
-<%--
-  Created by IntelliJ IDEA.
-  User: michal
-  Date: 08.09.18
-  Time: 15:55
-  To change this template use File | Settings | File Templates.
---%>
-<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
-<%--<html>--%>
-<%--<head>--%>
-<%--<title>Busstop details</title>--%>
-<%--</head>--%>
-<%--<body>--%>
-<%--<jsp:include page="/WEB-INF/fragments/header.jsp"/>--%>
-
-<%--<table>--%>
-<%--<tbody>--%>
-<%--<tr>--%>
-<%--<td>ID</td>--%>
-<%--<td><c:out value="${busstop.id}"/></td>--%>
-<%--</tr>--%>
-<%--<tr>--%>
-<%--<td>Name</td>--%>
-<%--<td><c:out value="${busstop.name}"/></td>--%>
-<%--</tr>--%>
-<%--</tbody>--%>
-<%--</table>--%>
-
-<%--<a href="/busstops/edit/<c:out value="${busstop.id}"/>">Edit</a>--%>
-<%--<a href="/busstops/del/<c:out value="${busstop.id}"/>">Delete</a>--%>
-
-<%--&lt;%&ndash;<ul>&ndash;%&gt;--%>
-<%--&lt;%&ndash;<c:forEach var="ride" items="${rides}">&ndash;%&gt;--%>
-<%--&lt;%&ndash;<li>&ndash;%&gt;--%>
-<%--&lt;%&ndash;<c:out value="${ride.route.line.number}"/>&ndash;%&gt;--%>
-<%--&lt;%&ndash;<c:out value="${ride.arrivalTime}"/>&ndash;%&gt;--%>
-<%--&lt;%&ndash;</li>&ndash;%&gt;--%>
-<%--&lt;%&ndash;</c:forEach>&ndash;%&gt;--%>
-<%--&lt;%&ndash;</ul>&ndash;%&gt;--%>
-
-<%--<ul>--%>
-<%--<c:forEach var="line" items="${lines}">--%>
-<%--<li>--%>
-<%--<c:out value="${line.number}"/>--%>
-<%--<ul>--%>
-<%--<c:forEach var="schedule" items="${schedules.get(line.id)}">--%>
-<%--<li>--%>
-<%--<c:out value="${schedule.arrivalTime}"/>--%>
-<%--</li>--%>
-<%--</c:forEach>--%>
-<%--</ul>--%>
-<%--</li>--%>
-<%--</c:forEach>--%>
-<%--</ul>--%>
-
-<%--&lt;%&ndash;<ul>&ndash;%&gt;--%>
-<%--&lt;%&ndash;<c:forEach var="list" items="${collect}">&ndash;%&gt;--%>
-<%--&lt;%&ndash;<li>&ndash;%&gt;--%>
-<%--&lt;%&ndash;<c:out value="${list.get(0).route.line.number}"/>&ndash;%&gt;--%>
-<%--&lt;%&ndash;<ul>&ndash;%&gt;--%>
-<%--&lt;%&ndash;<c:forEach var="elem" items="${list}">&ndash;%&gt;--%>
-<%--&lt;%&ndash;<li>&ndash;%&gt;--%>
-<%--&lt;%&ndash;<c:out value="${elem.arrivalTime}"/>&ndash;%&gt;--%>
-<%--&lt;%&ndash;</li>&ndash;%&gt;--%>
-<%--&lt;%&ndash;</c:forEach>&ndash;%&gt;--%>
-<%--&lt;%&ndash;</ul>&ndash;%&gt;--%>
-<%--&lt;%&ndash;</li>&ndash;%&gt;--%>
-<%--&lt;%&ndash;</c:forEach>&ndash;%&gt;--%>
-<%--&lt;%&ndash;</ul>&ndash;%&gt;--%>
-
-
-<%--<jsp:include page="/WEB-INF/fragments/footer.jsp"/>--%>
-<%--</body>--%>
-<%--</html>--%>

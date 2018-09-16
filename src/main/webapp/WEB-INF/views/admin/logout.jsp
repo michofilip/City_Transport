@@ -26,25 +26,6 @@
                                 <input type="submit" value="Logout"/>
                             </div>
                         </form>
-
-                        <%--<form:form role="form" action="/login" modelAttribute="route" method="POST">--%>
-                        <%--<form:hidden path="id"/>--%>
-
-                        <%--<form:hidden path="orderNo"/>--%>
-                        <%--<form:hidden path="line"/>--%>
-
-                        <%--<div class="form-group">--%>
-                        <%--Busstop--%>
-                        <%--<form:select path="busstop">--%>
-                        <%--<form:option value="" label="--Select busstop--"/>--%>
-                        <%--<form:options items="${busstops}" itemLabel="name" itemValue="id"/>--%>
-                        <%--</form:select>--%>
-                        <%--<form:errors path="busstop" cssClass="error"/><br>--%>
-                        <%--</div>--%>
-
-                        <%--<input type="submit" value="Submit" class="btn btn-default">--%>
-                        <%--</form:form>--%>
-
                     </div>
                 </div>
             </div>

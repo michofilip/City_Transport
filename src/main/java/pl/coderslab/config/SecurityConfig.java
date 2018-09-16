@@ -30,7 +30,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/admin").authenticated()
                 .and()
-//                .csrf().disable()
                 .formLogin().loginPage("/login");
         ;
     }

@@ -22,11 +22,6 @@ import java.util.List;
 @RequestMapping("/rides")
 @AllArgsConstructor
 public class RideController {
-//    GET 	/books/ 	Zwraca listę wszystkich książek.
-//    POST 	/books/ 	Tworzy nową książkę na podstawie danych przekazanych z formularza i zapisuje ją do bazy danych.
-//    GET 	/books/{id} 	Wyświetla informacje o książce o podanym id.
-//    PUT 	/books/{id} 	Zmienia informacje o książce o podanym id na nową.
-//    DELETE 	/books/{id} 	Usuwa książkę o podanym id z bazy danych.
 
     private final RideRepository rideRepository;
     private final BusRepository busRepository;

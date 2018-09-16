@@ -15,11 +15,6 @@ import java.util.List;
 @RequestMapping("/announcements")
 @AllArgsConstructor
 public class AnnouncementController {
-//    GET 	/books/ 	Zwraca listę wszystkich książek.
-//    POST 	/books/ 	Tworzy nową książkę na podstawie danych przekazanych z formularza i zapisuje ją do bazy danych.
-//    GET 	/books/{id} 	Wyświetla informacje o książce o podanym id.
-//    PUT 	/books/{id} 	Zmienia informacje o książce o podanym id na nową.
-//    DELETE 	/books/{id} 	Usuwa książkę o podanym id z bazy danych.
 
     private final AnnouncementRepository announcementRepository;
 

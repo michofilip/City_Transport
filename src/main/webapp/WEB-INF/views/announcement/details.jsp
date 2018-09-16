@@ -23,10 +23,10 @@
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-hover">
                     <tbody>
-                    <tr>
-                        <td>ID</td>
-                        <td><c:out value="${announcement.id}"/></td>
-                    </tr>
+                    <%--<tr>--%>
+                        <%--<td>ID</td>--%>
+                        <%--<td><c:out value="${announcement.id}"/></td>--%>
+                    <%--</tr>--%>
                     <tr>
                         <td>Created</td>
                         <%--<td><c:out value="${announcement.created}"/></td>--%>
