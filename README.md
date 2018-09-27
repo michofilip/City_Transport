@@ -6,7 +6,7 @@ It allows to manage and display information about bus stops, routes, time tables
 
 ## Technologies used
 
-Java 8, Spring, Hibernate, JSP, Maven, MySql, Bootstrap
+Java 8, Spring, Hibernate, JSP, Maven, MySql, Bootstrap, Lombok 
 
 
 ## Authors
